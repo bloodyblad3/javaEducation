@@ -6,16 +6,36 @@ public class homework {
     public static void main(String[] args) {
         System.out.println(isSumBetween10And20(5, 15)); // true
         System.out.println(isSumBetween10And20(7, 15)); // false
+        System.out.println();
 
         System.out.println(isPositive(5));
+        System.out.println();
 
         printString("abcd", 5); // abcdabcdabcdabcdabcd
-        System.out.println(isLeapYear(1992)); // true
-        System.out.println(Arrays.toString(createArray(5, 10))); // [10, 10, 10, 10, 10]
+        System.out.println();
 
-        // int[][] array = new int[4][4]; // [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, x],
-        // [0, 0, 0, 1]]
-        // int x = array[2][3];
+        System.out.println(isLeapYear(1992)); // true
+        System.out.println();
+
+        System.out.println(Arrays.toString(createArray(5, 10))); // [10, 10, 10, 10, 10]
+        System.out.println();
+
+        int[] array = new int[] { 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+        System.out.println(Arrays.toString(array)); // [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ]
+        System.out.println(Arrays.toString(swap0to1(array))); // [0, 0, 1, 1, 0, 1, 0, 0, 1, 1]
+        System.out.println();
+
+        int[] array2 = new int[] { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 };
+        System.out.println(Arrays.toString(array2)); // [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ]
+        System.out.println(Arrays.toString(pow(array2)));
+        System.out.println();
+
+        int[][] array3 = create2dArray(5, 5);
+        Arrays.stream(array3).forEach(arr -> System.out.println(Arrays.toString(arr)));
+        System.out.println();
+
+        minmax(array2); // min: 2 max: 11
+        System.out.println();
 
         String[] stringArray = { "aaa", "aab", "aa" };
         System.out.println(findCommonPrefix(stringArray)); // aa
@@ -23,11 +43,6 @@ public class homework {
         System.out.println(findCommonPrefix(stringArray2)); // ""
     }
 
-    /**
-     * 1. Написать метод, принимающий на вход два целых числа и проверяющий,
-     * что их сумма лежит в пределах от 10 до 20 (включительно), если да – вернуть
-     * true, в противном случае – false.
-     */
     private static boolean isSumBetween10And20(int a, int b) {
         // проверить, что сумма a и b лежит между 10 и 20
         int sum = a + b;
@@ -73,27 +88,73 @@ public class homework {
         return array;
     }
 
-    private static String findCommonPrefix(String[] source) {
-        /**
-         * Найти общий префикс среди слов из одного массива.
-         * ["aaa", "aab", "aa"] -> "aa", ["abc", "bca", "cda"] -> ""
-         */
-        return null;
+    private static int[] swap0to1(int[] array) {
+        // Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1,
+        // 0, 0, 1, 0, 1, 1, 0, 0 ]. С помощью цикла и условия заменить 0 на 1, 1 на 0;
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (array[i] == 1) ? 0 : 1;
+        }
+        return array;
     }
 
-    /**
-     * 1. Задать целочисленный массив, состоящий из элементов 0 и 1.
-     * Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ]. С помощью цикла и условия
-     * заменить 0 на 1, 1 на 0;
-     * 2. Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему
-     * циклом, и числа меньшие 6 умножить на 2;
-     * 3. Создать квадратный двумерный целочисленный массив (количество строк и
-     * столбцов одинаковое),
-     * и с помощью цикла(-ов) заполнить его диагональные элементы единицами (можно
-     * только одну из диагоналей, если обе сложно).
-     * Определить элементы одной из диагоналей можно по следующему принципу: индексы
-     * таких элементов равны, то есть [0][0], [1][1], [2][2], …, [n][n];
-     * 4. Задать одномерный массив и найти в нем минимальный и максимальный элементы
-     * ;
-     */
+    private static int[] pow(int[] array) {
+        // Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему циклом,
+        // и числа меньшие 6 умножить на 2;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 6) {
+                array[i] = array[i] * 2;
+            }
+        }
+        return array;
+    }
+
+    private static int[][] create2dArray(int row, int column) {
+        // Создать квадратный двумерный целочисленный массив (количество строк и
+        // столбцов одинаковое),
+        // и с помощью цикла(-ов) заполнить его диагональные элементы единицами
+        // (можнотолько одну из диагоналей, если обе сложно).
+        int[][] array = new int[row][column];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                array[i][i] = 1;
+                array[i][array.length - 1 - i] = 1;
+            }
+        }
+        return array;
+    }
+
+    private static void minmax(int[] array) {
+        // Задать одномерный массив и найти в нем минимальный и максимальный элементы
+        int min = array[0];
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] >= max) {
+                max = array[i];
+            }
+            if (array[i] <= min) {
+                min = array[i];
+            }
+        }
+        System.out.printf("min: %d max: %d", min, max);
+        // или
+        System.out.println();
+        Arrays.sort(array);
+        System.out.printf("min: %d max: %d", array[0], array[array.length - 1]);
+        System.out.println();
+    }
+
+    private static String findCommonPrefix(String[] source) {
+        // Найти общий префикс среди слов из одного массива.
+        // ["aaa", "aab", "aa"] -> "aa", ["abc", "bca", "cda"] -> ""
+        if (source.length == 0)
+            return "";
+        String prefix = source[0];
+        for (var str : source)
+            while (str.indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty())
+                    return "";
+            }
+        return prefix;
+    }
 }
