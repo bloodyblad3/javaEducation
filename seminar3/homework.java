@@ -37,6 +37,7 @@ public class homework {
     }
 
     private static ArrayList<Integer> createList(int size) {
+        // create list method
         ArrayList<Integer> list = new ArrayList<Integer>(size);
         Random r = new Random();
         for (int i = 0; i < size; i++) {
