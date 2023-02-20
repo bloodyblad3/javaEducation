@@ -22,8 +22,8 @@ public class homework {
                         try {
                             for (int i = 0; i < list.size(); i++) {
                                 String string = list.get(i);
-                                String[] tempsplit = string.split("~");
-                                int findnum = Integer.parseInt(tempsplit[1]);
+                                split = string.split("~");
+                                int findnum = Integer.parseInt(split[1]);
                                 if (num == findnum) {
                                     System.out.println(list.get(i));
                                 }
@@ -35,6 +35,14 @@ public class homework {
                 } else if (text.equals("exit")) {
                     break;
                 } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        String string = list.get(i);
+                        split = string.split("~");
+                        int tempnum = Integer.parseInt(split[1]);
+                        if (num == tempnum) {
+                            list.remove(i);
+                        }
+                    }
                     list.add(text);
                 }
             }
