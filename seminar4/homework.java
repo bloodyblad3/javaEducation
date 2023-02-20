@@ -1,6 +1,6 @@
 package seminar4;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class homework {
 
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            ArrayList<String> list = new ArrayList<String>();
+            LinkedList<String> list = new LinkedList<String>();
             System.out.println("Для ввода используйте формат (text~num)\nДля вывода используйте формат (print~num)");
             while (true) {
                 String text = sc.nextLine();
