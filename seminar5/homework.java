@@ -42,7 +42,7 @@ public class homework {
         }
         Stack<Character> stack = new Stack<Character>();
         char[] openBrackets = new char[] { '{', '[', '(', '<' };
-        char[] closeBrackets = new char[] { '}', ']', ')', '>'};
+        char[] closeBrackets = new char[] { '}', ']', ')', '>' };
 
         for (int i = 0; i < str.length(); i++) {
             char symb = str.charAt(i);
