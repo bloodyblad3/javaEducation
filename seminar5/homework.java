@@ -3,7 +3,7 @@ package seminar5;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class homework1 {
+public class homework {
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -17,10 +17,6 @@ public class homework1 {
     }
 
     private static boolean isInArray(char symb, char[] arr) {
-        if (arr == null) {
-            throw new IllegalArgumentException(); 
-        }
-
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == symb) {
                 return true;
@@ -30,10 +26,6 @@ public class homework1 {
     }
 
     private static int indexOf(char symb, char[] arr) {
-        if (arr == null) {
-            throw new IllegalArgumentException();
-        }
-
         int index = -1;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == symb) {
@@ -44,10 +36,10 @@ public class homework1 {
     }
 
     private static boolean checkBrackets(String str) {
-        if (str == null) {
-            throw new IllegalArgumentException();
+        if (str.isBlank()) {
+            System.out.println("Строка не может быть пустой!");
+            System.exit(0);
         }
-
         Stack<Character> stack = new Stack<Character>();
         char[] openBrackets = new char[] { '{', '[', '(', '<' };
         char[] closeBrackets = new char[] { '}', ']', ')', '>'};
