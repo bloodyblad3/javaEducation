@@ -3,9 +3,9 @@ package seminar6;
 
 public class Cat {
 
-    String name;
-    int appetite;
-    volatile int satiety;
+    private String name;
+    private int appetite;
+    private volatile int satiety;
 
     public Cat(String name, int appetite) {
         this.name = name;
