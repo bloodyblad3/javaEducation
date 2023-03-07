@@ -44,7 +44,8 @@ public class Player implements HasHealthPoint, HasEnergy {
         if (!isTired()) {
             currentEnergy = currentEnergy - 10;
             build.takeDamage(damage);
-            ;
+        } else {
+            System.out.println("Персонаж устал!");
         }
     }
 

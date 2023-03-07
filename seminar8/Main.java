@@ -3,16 +3,20 @@ package seminar8;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        Building build = new Building(1000);
-        Player keruvim = new Player("keruvim", 100, 150, 50);
+        Building build = new Building(100);
+        Player keruvim = new Player("keruvim", 100, 150, 5);
         Render render = new Render();
-        HealthPointViewer healthPointViewer = new HealthPointViewer();
-        EnergyViewer energyViewer = new EnergyViewer();
-        while (!build.isBroke()) {
-            keruvim.attack(build);
-            render.render(build.getCurrentHealthPoint());
-            render.render(healthPointViewer.viewHealthPoint(keruvim));
-            render.render(energyViewer.viewEnergy(keruvim));
+        System.out.println(build);
+        System.out.println(keruvim);
+        while (true) {
+            if (!build.isBroke()) {
+                keruvim.attack(build);
+                render.render(build);
+                render.render(keruvim); 
+            } else {
+                System.out.println("Здание сломано!");
+                break;
+            }
             Thread.sleep(1000);
         }
     }

@@ -5,11 +5,3 @@ public interface HasEnergy {
     int getCurrentEnergy();
 
 }
-
-class EnergyViewer {
-
-    public int viewEnergy(HasEnergy hasEnergy) {
-        return hasEnergy.getCurrentEnergy();
-    }
-
-}

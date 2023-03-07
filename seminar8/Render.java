@@ -10,22 +10,23 @@ public class Render {
     public void render(Object object) {
         if (object instanceof HasHealthPoint hasHealthPoint) {
             int currentHp = hasHealthPoint.getCurrentHealthPoint();
-            System.out.println("hp works!");
+            String result = "ХП: " + currentHp;
             if (currentHp >= 0 && currentHp <= 24) {
-                System.out.println(ANSI_BLACK + currentHp + ANSI_RESET);
+                System.out.println(ANSI_BLACK + result + ANSI_RESET);
             } else if (currentHp > 24 && currentHp <= 50) {
-                System.out.println(ANSI_RED + currentHp + ANSI_RESET);
+                System.out.println(ANSI_RED + result + ANSI_RESET);
             } else {
-                System.out.println(ANSI_GREEN + currentHp + ANSI_RESET);
+                System.out.println(ANSI_GREEN + result + ANSI_RESET);
             }
-        } else if (object instanceof HasEnergy hasEnergy) {
+        } if (object instanceof HasEnergy hasEnergy) {
             int currentEnergy = hasEnergy.getCurrentEnergy();
+            String result = "Энергия: " + currentEnergy;
             if (currentEnergy >= 0 && currentEnergy <= 24) {
-                System.out.println(ANSI_BLACK + currentEnergy + ANSI_RESET);
+                System.out.println(ANSI_BLACK + result + ANSI_RESET);
             } else if (currentEnergy > 24 && currentEnergy <= 50) {
-                System.out.println(ANSI_RED + currentEnergy + ANSI_RESET);
+                System.out.println(ANSI_RED + result + ANSI_RESET);
             } else {
-                System.out.println(ANSI_GREEN + currentEnergy + ANSI_RESET);
+                System.out.println(ANSI_GREEN + result + ANSI_RESET);
             }
         }
     }
