@@ -1,6 +1,6 @@
 package seminar10;
 
-public class HomeWork {
+public class Main {
 
     public static void main(String[] args) {
         // Есть классы: GoldenApple -> Apple -> Fruit
