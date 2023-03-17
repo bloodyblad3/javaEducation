@@ -23,7 +23,7 @@ public class RobotMap {
         checkPosition(position);
 
         Robot robot = new Robot(position);
-        
+
         robots.put(robot.id, robot);
         return robot;
     }
@@ -80,13 +80,6 @@ public class RobotMap {
 
         public void changeDirection(Direction direction) {
             this.direction = direction;
-        }
-
-        public boolean checkWin(Point map) {
-            if (this.position == map) {
-                return true;
-            }
-            return false;
         }
 
         @Override

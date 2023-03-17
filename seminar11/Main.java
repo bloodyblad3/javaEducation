@@ -8,9 +8,6 @@ import seminar11.RobotMap.Direction;
 
 public class Main {
 
-    // Client <-> API <-> Model
-    // Client_2
-
     public static void main(String[] args) {
         // 1.
         // Карта с каким-то размером nxm.
@@ -35,7 +32,7 @@ public class Main {
         // create-robot 2 7
         // move-robot id
         // change-direction id LEFT
-        
+
         Scanner sc = new Scanner(System.in);
         ArrayList<RobotMap.Robot> robots = new ArrayList<>();
         RobotMap map = null;
@@ -44,8 +41,8 @@ public class Main {
         while (true) {
             String command = sc.nextLine();
             if (command.startsWith("create-map")) {
-                String[] split = command.split(" "); // [create-map 3 5]
-                String[] arguments = Arrays.copyOfRange(split, 1, split.length); // [3 5]
+                String[] split = command.split(" ");
+                String[] arguments = Arrays.copyOfRange(split, 1, split.length);
 
                 try {
                     map = new RobotMap(Integer.parseInt(arguments[0]), Integer.parseInt(arguments[1]));
@@ -75,8 +72,8 @@ public class Main {
                     robots.add(robot);
                     System.out.println("Робот создан!" + robot);
 
-                } catch (Exception e) {
-                    e.getMessage();
+                } catch (PositionException e) {
+                    System.out.println("При создании робота возникла ошибка!" + e.getMessage());
                 }
             }
             if (command.startsWith("move-robot")) {
@@ -92,7 +89,7 @@ public class Main {
                         }
                     }
                 } catch (Exception e) {
-                    e.getMessage();
+                    System.out.println("При движении робота возникла ошибка! " + e.getMessage());
                 }
             }
             if (command.startsWith("change-direction")) {
@@ -119,7 +116,7 @@ public class Main {
                     }
                     System.out.println("Направление изменено на " + arguments[1].toUpperCase());
                 } catch (Exception e) {
-                    e.getMessage();
+                    System.out.println("При изменении направления возникла ошибка!" + e.getMessage());
                 }
             }
             if (command.startsWith("robots")) {
