@@ -1,12 +1,12 @@
 package seminar11;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
-import seminar11.RobotMap.Direction;
-
 public class Main {
+
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // 1.
@@ -33,8 +33,6 @@ public class Main {
         // move-robot id
         // change-direction id LEFT
 
-        Scanner sc = new Scanner(System.in);
-        ArrayList<RobotMap.Robot> robots = new ArrayList<>();
         RobotMap map = null;
         System.out.println("Введите команду для создания карты:");
         System.out.println("create-map (n, m)\nfor example: create-map 5 5");
@@ -56,76 +54,20 @@ public class Main {
             }
 
         }
+        List<CommandHandler> handlers = List.of(
+                new ChangeDirectionCommandHandler(),
+                new MoveRobotCommandHandler(),
+                new CreateRobotCommandHandler(),
+                new HelpCommandHandler(),
+                new RobotsCommandHandler());
+        CommandManager commandManager = new CommandManager(map, handlers);
+
         System.out.println();
         System.out.println("Карта создана! Игра началась.");
-        System.out.println(
-                "Команды для игры:\ncreate-robot(position) - create robot\nmove-robot(id) - move robot\nchange-direction(id, direction) - change direction(TOP, LEFT, BOTTOM, RIGHT)\nrobots - show your robots");
+        System.out.println("Введите help для подробностей");
         while (true) {
             String command = sc.nextLine();
-            if (command.startsWith("create-robot")) {
-                String[] split = command.split(" ");
-                String[] arguments = Arrays.copyOfRange(split, 1, split.length);
-
-                try {
-                    RobotMap.Robot robot = map
-                            .createRobot(new Point(Integer.parseInt(arguments[0]), Integer.parseInt(arguments[1])));
-                    robots.add(robot);
-                    System.out.println("Робот создан!" + robot);
-
-                } catch (PositionException e) {
-                    System.out.println("При создании робота возникла ошибка!" + e.getMessage());
-                }
-            }
-            if (command.startsWith("move-robot")) {
-                String[] split = command.split(" ");
-                int argument = Integer.parseInt(split[1]);
-
-                try {
-                    for (int i = 0; i < robots.size(); i++) {
-                        int id = robots.get(i).getId();
-                        if (id == argument) {
-                            robots.get(i).move();
-                            System.out.println("Позиция робота: " + robots.get(i).getPosition());
-                        }
-                    }
-                } catch (Exception e) {
-                    System.out.println("При движении робота возникла ошибка! " + e.getMessage());
-                }
-            }
-            if (command.startsWith("change-direction")) {
-                String[] split = command.split(" ");
-                String[] arguments = Arrays.copyOfRange(split, 1, split.length);
-
-                try {
-                    for (int i = 0; i < robots.size(); i++) {
-                        int id = robots.get(i).getId();
-                        if (id == Integer.parseInt(arguments[0])) {
-                            if (arguments[1].toUpperCase().equals("LEFT")) {
-                                robots.get(i).changeDirection(Direction.LEFT);
-                            }
-                            if (arguments[1].toUpperCase().equals("RIGHT")) {
-                                robots.get(i).changeDirection(Direction.RIGHT);
-                            }
-                            if (arguments[1].toUpperCase().equals("TOP")) {
-                                robots.get(i).changeDirection(Direction.TOP);
-                            }
-                            if (arguments[1].toUpperCase().equals("BOTTOM")) {
-                                robots.get(i).changeDirection(Direction.BOTTOM);
-                            }
-                        }
-                    }
-                    System.out.println("Направление изменено на " + arguments[1].toUpperCase());
-                } catch (Exception e) {
-                    System.out.println("При изменении направления возникла ошибка!" + e.getMessage());
-                }
-            }
-            if (command.startsWith("robots")) {
-                if (robots.size() != 0) {
-                    System.out.println(robots);
-                } else {
-                    System.out.println("Список роботов пуст! Создайте робота.");
-                }
-            }
+            commandManager.handleCommand(command);
         }
     }
 }

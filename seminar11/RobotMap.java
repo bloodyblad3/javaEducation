@@ -19,6 +19,14 @@ public class RobotMap {
         this.robots = new HashMap<>();
     }
 
+    public Robot findRobotById(int id) {
+        return robots.get(id);
+    }
+
+    public Map<Integer, Robot> getRobots() {
+        return robots;
+    }
+
     public Robot createRobot(Point position) throws PositionException {
         checkPosition(position);
 
@@ -41,7 +49,6 @@ public class RobotMap {
         return robots.values().stream()
                 .map(Robot::getPosition)
                 .noneMatch(position::equals);
-
     }
 
     public class Robot {
